@@ -9,13 +9,16 @@ import {
   Text,
   Image,
   Link,
-  Stack,
   Separator,
+  Stack,
 } from '@chakra-ui/react';
+
 import { useIntl } from 'react-intl';
+import { useAlbums } from '@/hooks/useAlbums';
+
 import AlbumDialog from '../components/AlbumDialog';
 import CreateAlbumDialog from '../components/CreateAlbumDialog';
-import { useAlbums } from '@/hooks/useAlbums';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function AlbumsPage() {
   const { formatMessage } = useIntl();
@@ -31,7 +34,7 @@ export default function AlbumsPage() {
     return (
       <Box textAlign="center" mt="10">
         <Spinner size="xl" />
-        <Text mt="4">Buscando por albuns</Text>
+        <Text mt="4">Buscando por albuns...</Text>
       </Box>
     );
   }
@@ -52,7 +55,15 @@ export default function AlbumsPage() {
       flexDirection="column"
       gap="5"
     >
-      <Heading as="h1" size="xl" mt="6">
+      <Heading
+        as="h1"
+        size="xl"
+        mt="6"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        p="4"
+      >
         Álbuns
         <CreateAlbumDialog onSave={addAlbum} />
       </Heading>
@@ -63,6 +74,7 @@ export default function AlbumsPage() {
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         gap="6"
         overflow="auto"
+        p="4"
       >
         {albums.map((album, idx) => (
           <Box
@@ -83,8 +95,15 @@ export default function AlbumsPage() {
                 setShowDialog(true);
               }}
               _hover={{ textDecoration: 'none' }}
+              height="100%"
             >
-              <Stack>
+              <Stack
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+                boxSizing="border-box"
+                height="100%"
+              >
                 <Text fontWeight="bold" fontSize="lg">
                   {album.name}
                 </Text>
@@ -92,9 +111,9 @@ export default function AlbumsPage() {
                   src="/album.png"
                   alt={album.name}
                   borderRadius="full"
-                  boxSize="100px"
+                  width={100}
+                  height={100}
                   mx="auto"
-                  mb="4"
                 />
                 <Text fontSize="sm" color="gray.500">
                   {album.year}
@@ -105,22 +124,7 @@ export default function AlbumsPage() {
         ))}
       </Grid>
 
-      {isLoading && (
-        <Box
-          position="absolute"
-          background="black"
-          width="100%"
-          height="100%"
-          top={0}
-          left={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          opacity={0.8}
-        >
-          <Spinner size="xl" opacity={1} />
-        </Box>
-      )}
+      {isLoading && <LoadingSpinner />}
 
       {showDialog && (
         <AlbumDialog
