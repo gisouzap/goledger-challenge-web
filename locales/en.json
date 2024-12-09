@@ -40,5 +40,9 @@
   "songs.album": "Album",
   "song.album": "Album: {name}, {year}",
   "song.artist": "Artist: {name}, {country}",
-  "song.title": "Song - {song}"
+  "song.title": "Song - {song}",
+  "greeting": "Hello, Team! :)",
+  "projectExperience": "This project was an excellent experience to learn new technologies like Chakra UI, React-Query, and it was also the first time I created an interface for a blockchain application. I have a few years of experience in the field (4+), working primarily with React. However, I had little experience with Next.js, and this project was fantastic for deepening my understanding. I had a lot of fun during the process, even though some features are still missing (like asset deletion and test coverage, for example).",
+  "exploreNavbar": "Feel free to explore the project by navigating through the links in the navbar.",
+  "thankYou": "Thank you for the opportunity, and I am open to suggestions for code improvements and idea exchanges!"
 }
