@@ -1,5 +1,7 @@
 'use client';
 
+import { useIntl } from 'react-intl';
+
 import {
   Stack,
   Text,
@@ -24,6 +26,8 @@ import EditAlbumDialog from './EditAlbumDialog';
 import { useArtist } from '@/hooks/useArtist';
 
 const AlbumDialog = ({ album, changeDialog, onSave }) => {
+  const { formatMessage } = useIntl();
+
   const { artist, isLoading } = useArtist(album.artist['@key']);
 
   return (
@@ -75,9 +79,21 @@ const AlbumDialog = ({ album, changeDialog, onSave }) => {
                 <Text fontSize="lg" fontWeight="bold">
                   {album.name}
                 </Text>
-                <Text>Ano: {album.year}</Text>
-                <Text>Artista: {artist?.name}</Text>
-                <Text>País: {artist?.country}</Text>
+                <Text>
+                  {formatMessage({ id: 'album.year' }, { year: album.year })}
+                </Text>
+                <Text>
+                  {formatMessage(
+                    { id: 'album.artist' },
+                    { artist: artist?.name }
+                  )}
+                </Text>
+                <Text>
+                  {formatMessage(
+                    { id: 'album.country' },
+                    { country: artist?.country }
+                  )}
+                </Text>
               </Stack>
             </HStack>
           </DialogBody>

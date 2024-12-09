@@ -18,5 +18,9 @@
   "albums.name": "Name",
   "albums.year": "Year",
   "albums.artist": "Artist",
-  "albums.artistSelect": "Select artist"
+  "albums.artistSelect": "Select artist",
+  "album.year": "Year: {year}",
+  "album.artist": "Artist: {artist}",
+  "album.country": "Country: {country}",
+  "album.editYear": "Edit Year"
 }

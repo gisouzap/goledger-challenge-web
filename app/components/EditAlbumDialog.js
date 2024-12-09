@@ -19,8 +19,10 @@ import {
 } from '@/components/ui/dialog';
 
 import { Field } from '@/components/ui/field';
+import { useIntl } from 'react-intl';
 
 const EditAlbumDialog = ({ album, onSave }) => {
+  const { formatMessage } = useIntl();
   const [year, setYear] = useState(album.year);
 
   return (
@@ -28,17 +30,17 @@ const EditAlbumDialog = ({ album, onSave }) => {
       <DialogTrigger asChild>
         <Button colorPalette="purple" variant="outline">
           <MdEdit />
-          Editar Ano
+          {formatMessage({ id: 'album.editYear' })}
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Editar Ano </DialogTitle>
+          <DialogTitle> {formatMessage({ id: 'album.editYear' })}</DialogTitle>
         </DialogHeader>
         <DialogBody>
           <Stack gap="5">
-            <Field label="Ano">
+            <Field label={formatMessage({ id: 'albums.year' })}>
               <Input onChange={e => setYear(e.target.value)} />
             </Field>
           </Stack>
@@ -46,7 +48,7 @@ const EditAlbumDialog = ({ album, onSave }) => {
         <DialogFooter>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" variant="outline">
-              Cancel
+              {formatMessage({ id: 'cancel' })}
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
@@ -54,7 +56,7 @@ const EditAlbumDialog = ({ album, onSave }) => {
               colorPalette="purple"
               onClick={() => onSave({ ...album, year })}
             >
-              Save
+              {formatMessage({ id: 'save' })}
             </Button>
           </DialogActionTrigger>
         </DialogFooter>
