@@ -1,16 +1,8 @@
 'use client';
 
-import {
-  Stack,
-  Text,
-  Image,
-  HStack,
-  DialogFooter,
-  Button,
-} from '@chakra-ui/react';
+import { Stack, Text, Image, HStack, DialogFooter } from '@chakra-ui/react';
 
 import {
-  DialogActionTrigger,
   DialogBody,
   DialogCloseTrigger,
   DialogContent,
@@ -23,6 +15,8 @@ import { useAlbum } from '@/hooks/useAlbum';
 import { useArtist } from '@/hooks/useArtist';
 import { useIntl } from 'react-intl';
 import LoadingSpinner from './LoadingSpinner';
+
+//TODO: implement remove song button
 
 const SongDialog = ({ song, changeDialog }) => {
   const { formatMessage } = useIntl();
@@ -74,11 +68,7 @@ const SongDialog = ({ song, changeDialog }) => {
             </HStack>
           </DialogBody>
 
-          <DialogFooter>
-            <DialogActionTrigger asChild>
-              {/* <Button>Excluir Música?</Button> */}
-            </DialogActionTrigger>
-          </DialogFooter>
+          <DialogFooter></DialogFooter>
 
           <DialogCloseTrigger />
         </DialogContent>
