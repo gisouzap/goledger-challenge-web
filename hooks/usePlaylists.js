@@ -20,32 +20,32 @@ export const usePlaylists = () => {
     queryFn: fetchPlaylists,
   });
 
-  // const { mutate: addSong, isPending: isSaving } = useMutation({
-  //   mutationFn: async newSong => {
-  //     const res = await fetch('/api/songs/create', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         asset: [
-  //           {
-  //             ...newSong,
-  //           },
-  //         ],
-  //       }),
-  //     });
+  const { mutate: addPlaylist, isPending: isSaving } = useMutation({
+    mutationFn: async newPlaylist => {
+      const res = await fetch('/api/playlists/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          asset: [
+            {
+              ...newPlaylist,
+            },
+          ],
+        }),
+      });
 
-  //     if (!res.ok) {
-  //       throw new Error('Erro ao adicionar musica');
-  //     }
-  //     return res.json();
-  //   },
+      if (!res.ok) {
+        throw new Error('Erro ao adicionar playlist');
+      }
+      return res.json();
+    },
 
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['songs']);
-  //   },
-  // });
+    onSuccess: () => {
+      queryClient.invalidateQueries(['playlists']);
+    },
+  });
 
   // const { mutate: editSong, isPending: isEditing } = useMutation({
   //   mutationFn: async updatedSong => {
@@ -97,11 +97,12 @@ export const usePlaylists = () => {
 
   return {
     playlists: data || [],
-    // isLoading: isSaving,
+    isLoading: isSaving,
     // editSong,
     // error,
     // addSong,
     // deleteAlbum,
+    addPlaylist,
     isFetching,
   };
 };

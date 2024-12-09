@@ -32,8 +32,6 @@ const NEW_PLAYLIST = {
 };
 
 const CreatePlaylistDialog = ({ onSave }) => {
-  // const { albums } = useAlbums();
-
   const { songs } = useSongs();
 
   const [newPlaylist, setPlaylist] = useState(NEW_PLAYLIST);
@@ -41,13 +39,15 @@ const CreatePlaylistDialog = ({ onSave }) => {
   const [newSong, setNewSong] = useState();
 
   const handleSave = () => {
-    console.log(newPlaylist);
-    // onSave(newSong);
-    // setNewSong(NEW_SONG);
+    onSave({ ...newPlaylist, songs: [...selectedSongs], private: true });
+
+    clear();
   };
 
-  const handleChange = value => {
-    setNewSong({ ...newSong, ...value });
+  const clear = () => {
+    setPlaylist(NEW_PLAYLIST);
+    setSelectedSongs([]);
+    setNewSong(null);
   };
 
   return (
@@ -74,8 +74,7 @@ const CreatePlaylistDialog = ({ onSave }) => {
             </Field>
 
             <NativeSelectRoot
-              // size="xl"
-
+              size="xl"
               onChange={e =>
                 setNewSong({
                   '@assetType': 'song',
@@ -84,10 +83,10 @@ const CreatePlaylistDialog = ({ onSave }) => {
               }
             >
               <NativeSelectField placeholder="Select one music">
-                {songs?.map(song => (
+                {songs?.map((song, idx) => (
                   <option
                     value={song['@key']}
-                    key={song['@key']}
+                    key={song['@key'] + idx}
                     style={{ backgroundColor: '#171717' }}
                   >
                     {song.name}
@@ -97,15 +96,21 @@ const CreatePlaylistDialog = ({ onSave }) => {
             </NativeSelectRoot>
 
             <Button
-              onClick={() => setSelectedSongs([...selectedSongs, newSong])}
+              onClick={() => {
+                setSelectedSongs([...selectedSongs, newSong]);
+                document.querySelector('select').value = '';
+              }}
             >
               Adicionar
             </Button>
           </Stack>
 
-          <Text mt="6" textAlign="center">
-            Músicas Adicionadas
-          </Text>
+          {selectedSongs.length > 0 && (
+            <Text mt="6" textAlign="center">
+              Músicas Adicionadas
+            </Text>
+          )}
+
           <Stack
             mt="5"
             gap="5"
@@ -132,14 +137,14 @@ const CreatePlaylistDialog = ({ onSave }) => {
             }}
           >
             {selectedSongs.map((song, idx) => (
-              <Song item={song} key={song['@key' + idx]} />
+              <Song item={song} key={JSON.stringify(selectedSongs)} />
             ))}
           </Stack>
         </DialogBody>
 
         <DialogFooter>
           <DialogActionTrigger asChild>
-            <Button colorPalette="purple" variant="outline">
+            <Button colorPalette="purple" variant="outline" onClick={clear}>
               Cancel
             </Button>
           </DialogActionTrigger>
@@ -149,7 +154,6 @@ const CreatePlaylistDialog = ({ onSave }) => {
             </Button>
           </DialogActionTrigger>
         </DialogFooter>
-        <DialogCloseTrigger />
       </DialogContent>
     </DialogRoot>
   );

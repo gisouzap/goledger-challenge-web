@@ -9,7 +9,6 @@ import {
   Link,
   Separator,
   HStack,
-  Button,
   Spinner,
 } from '@chakra-ui/react';
 import { useIntl } from 'react-intl';
@@ -17,11 +16,12 @@ import { useIntl } from 'react-intl';
 import { usePlaylists } from '@/hooks/usePlaylists';
 import PlaylistDialog from '../components/PlaylistDialog';
 import CreatePlaylistDialog from '../components/CreatePlaylistDialog';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function PlaylistsPage() {
   const { formatMessage } = useIntl();
 
-  const { playlists, isFetching } = usePlaylists();
+  const { playlists, isFetching, addPlaylist, isLoading } = usePlaylists();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState();
   const [showDialog, setShowDialog] = useState(false);
@@ -54,6 +54,10 @@ export default function PlaylistsPage() {
   //   );
   // }
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <Box
       boxSizing="border-box"
@@ -64,7 +68,7 @@ export default function PlaylistsPage() {
     >
       <Heading as="h1" size="xl" mt="6">
         Playlists
-        <CreatePlaylistDialog onSave={() => {}} />
+        <CreatePlaylistDialog onSave={addPlaylist} />
       </Heading>
 
       <Separator />

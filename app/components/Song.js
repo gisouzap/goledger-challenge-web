@@ -10,14 +10,11 @@ import LoadingSpinner from './LoadingSpinner';
 
 const Song = ({ item }) => {
   const { song, isLoading: isSongLoading } = useSong(item['@key']);
+
   const { album, isLoading: isAlbumLoading } = useAlbum(song?.album['@key']);
   const { artist, isLoading: isArtistLoading } = useArtist(
     album?.artist['@key']
   );
-
-  if (item == []) {
-    return <Text>Não há músicas nessa playlist ainda.</Text>;
-  }
 
   return (
     <Box>
