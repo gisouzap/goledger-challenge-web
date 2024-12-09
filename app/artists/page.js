@@ -76,6 +76,7 @@ export default function ArtistsPage() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        p="4"
       >
         {formatMessage({ id: 'artists.title' })}
         <CreateArtistDialog onSave={addArtist} />

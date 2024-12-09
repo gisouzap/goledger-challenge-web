@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/dialog';
 
 import { Field } from '@/components/ui/field';
+import { useIntl } from 'react-intl';
 
 const BLANK_ARTIST = {
   '@assetType': 'artist',
@@ -27,6 +28,8 @@ const BLANK_ARTIST = {
 };
 
 const EditArtistDialog = ({ artist, onSave }) => {
+  const { formatMessage } = useIntl();
+
   const [newArtist, setNewArtist] = useState(artist);
 
   const handleSave = () => {
@@ -64,12 +67,12 @@ const EditArtistDialog = ({ artist, onSave }) => {
         <DialogFooter>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" variant="outline">
-              Cancel
+              {formatMessage({ id: 'cancel' })}
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" onClick={handleSave}>
-              Save
+              {formatMessage({ id: 'save' })}
             </Button>
           </DialogActionTrigger>
         </DialogFooter>

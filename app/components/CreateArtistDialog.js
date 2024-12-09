@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dialog';
 
 import { Field } from '@/components/ui/field';
+import { useIntl } from 'react-intl';
 
 const NEW_ARTIST = {
   name: '',
@@ -24,6 +25,8 @@ const NEW_ARTIST = {
 };
 
 const CreateArtistDialog = ({ onSave }) => {
+  const { formatMessage } = useIntl();
+
   const [newArtist, setNewArtist] = useState(NEW_ARTIST);
 
   const handleSave = () => {
@@ -35,17 +38,19 @@ const CreateArtistDialog = ({ onSave }) => {
     <DialogRoot placement="center">
       <DialogTrigger asChild>
         <Button color="purple.500" variant="surface" fontFamily="Outfit">
-          Adicionar
+          {formatMessage({ id: 'add' })}
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Criar Novo Artista</DialogTitle>
+          <DialogTitle>
+            {formatMessage({ id: 'artists.createNew' })}
+          </DialogTitle>
         </DialogHeader>
         <DialogBody>
           <Stack gap="5">
-            <Field label="Nome">
+            <Field label={formatMessage({ id: 'artist.name' })}>
               <Input
                 defaultValue={newArtist.name}
                 onChange={e =>
@@ -54,7 +59,7 @@ const CreateArtistDialog = ({ onSave }) => {
               />
             </Field>
 
-            <Field label="País">
+            <Field label={formatMessage({ id: 'artist.country' })}>
               <Input
                 defaultValue={newArtist.country}
                 onChange={e =>
@@ -67,12 +72,12 @@ const CreateArtistDialog = ({ onSave }) => {
         <DialogFooter>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" variant="outline">
-              Cancel
+              {formatMessage({ id: 'cancel' })}
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" onClick={handleSave}>
-              Save
+              {formatMessage({ id: 'save' })}
             </Button>
           </DialogActionTrigger>
         </DialogFooter>
