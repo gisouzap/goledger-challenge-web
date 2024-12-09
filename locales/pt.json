@@ -1,6 +1,7 @@
 {
   "welcome": "Welcome!",
   "delete": "Excluir",
+  "add": "Adicionar",
   "navbar.artists": "Artistas",
   "navbar.albums": "Álbuns",
   "navbar.playlists": "Playlists",
@@ -10,5 +11,10 @@
   "artists.country": "País: {country}",
   "artists.lastUpdated": "Última atualização: {updatedAt}",
   "albums.loading": "Procurando por álbuns",
-  "albums.title": "Álbuns"
+  "albums.title": "Álbuns",
+  "albums.createNew": "Criar novo álbum",
+  "albums.name": "Nome",
+  "albums.year": "Ano",
+  "albums.artist": "Artista",
+  "albums.artistSelect": "Selecionar artista"
 }

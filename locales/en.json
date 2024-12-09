@@ -1,6 +1,9 @@
 {
   "welcome": "Welcome!",
   "delete": "Delete",
+  "add": "Add",
+  "cancel": "Cancel",
+  "save": "Save",
   "navbar.artists": "Artists",
   "navbar.albums": "Albums",
   "navbar.playlists": "Playlists",
@@ -10,5 +13,10 @@
   "artists.country": "Country: {country}",
   "artists.lastUpdated": "Last updated at: {updatedAt}",
   "albums.loading": "Searching for albums",
-  "albums.title": "Albums"
+  "albums.title": "Albums",
+  "albums.createNew": "Create new album",
+  "albums.name": "Name",
+  "albums.year": "Year",
+  "albums.artist": "Artist",
+  "albums.artistSelect": "Select artist"
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button, Input, Stack } from '@chakra-ui/react';
+import { useIntl } from 'react-intl';
 
 import {
   DialogActionTrigger,
@@ -33,6 +34,7 @@ const NEW_ALBUM = {
 };
 
 const CreateAlbumDialog = ({ onSave }) => {
+  const { formatMessage } = useIntl();
   const { artists } = useArtists();
 
   const [newAlbum, setNewAlbum] = useState(NEW_ALBUM);
@@ -50,61 +52,65 @@ const CreateAlbumDialog = ({ onSave }) => {
     <DialogRoot placement="center">
       <DialogTrigger asChild>
         <Button color="purple.500" variant="surface" fontFamily="Outfit">
-          Adicionar
+          {formatMessage({ id: 'add' })}
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Criar Novo Álbum</DialogTitle>
+          <DialogTitle>{formatMessage({ id: 'albums.createNew' })}</DialogTitle>
         </DialogHeader>
         <DialogBody>
           <Stack gap="5">
-            <Field label="Nome">
+            <Field label={formatMessage({ id: 'albums.name' })}>
               <Input
                 value={newAlbum.name}
                 onChange={e => handleChange({ name: e.target.value })}
               />
             </Field>
 
-            <Field label="Ano">
+            <Field label={formatMessage({ id: 'albums.year' })}>
               <Input
                 value={newAlbum.year}
                 onChange={e => handleChange({ year: e.target.value })}
               />
             </Field>
 
-            <NativeSelectRoot
-              size="xl"
-              onChange={e =>
-                handleChange({
-                  artist: { ...newAlbum.artist, '@key': e.target.value },
-                })
-              }
-            >
-              <NativeSelectField placeholder="Select option">
-                {artists.map(artist => (
-                  <option
-                    style={{ backgroundColor: '#171717' }}
-                    value={artist['@key']}
-                    key={artist['@key']}
-                  >
-                    {artist.name}
-                  </option>
-                ))}
-              </NativeSelectField>
-            </NativeSelectRoot>
+            <Field label={formatMessage({ id: 'albums.artist' })}>
+              <NativeSelectRoot
+                size="xl"
+                onChange={e =>
+                  handleChange({
+                    artist: { ...newAlbum.artist, '@key': e.target.value },
+                  })
+                }
+              >
+                <NativeSelectField
+                  placeholder={formatMessage({ id: 'albums.artistSelect' })}
+                >
+                  {artists.map(artist => (
+                    <option
+                      style={{ backgroundColor: '#171717' }}
+                      value={artist['@key']}
+                      key={artist['@key']}
+                    >
+                      {artist.name}
+                    </option>
+                  ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
+            </Field>
           </Stack>
         </DialogBody>
         <DialogFooter>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" variant="outline">
-              Cancel
+              {formatMessage({ id: 'cancel' })}
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" onClick={handleSave}>
-              Save
+              {formatMessage({ id: 'save' })}
             </Button>
           </DialogActionTrigger>
         </DialogFooter>
