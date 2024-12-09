@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome!",
+  "delete": "Delete",
+  "navbar.artists": "Artists",
+  "navbar.albums": "Albums",
+  "navbar.playlists": "Playlists",
+  "navbar.songs": "Songs",
+  "artists.loading": "Searching for artists",
+  "artists.title": "Artists",
+  "artists.country": "Country: {country}",
+  "artists.lastUpdated": "Last updated at: {updatedAt}"
+}
