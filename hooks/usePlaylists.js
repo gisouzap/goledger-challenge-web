@@ -47,61 +47,13 @@ export const usePlaylists = () => {
     },
   });
 
-  // const { mutate: editSong, isPending: isEditing } = useMutation({
-  //   mutationFn: async updatedSong => {
-  //     const res = await fetch('/api/songs/update', {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         update: {
-  //           ...updatedSong,
-  //         },
-  //       }),
-  //     });
-
-  //     if (!res.ok) {
-  //       throw new Error('Erro ao editar música');
-  //     }
-  //     return res.json();
-  //   },
-
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['songs']);
-  //   },
-  // });
-
-  // const { mutate: deleteAlbum, isPending: isDeleting } = useMutation({
-  //   mutationFn: async key => {
-  //     const res = await fetch('/api/albums/delete', {
-  //       method: 'DELETE',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         key,
-  //       }),
-  //     });
-
-  //     if (!res.ok) {
-  //       throw new Error('Erro ao adicionar album');
-  //     }
-  //     return res.json();
-  //   },
-
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['albums']);
-  //   },
-  // });
+  // TODO: updatePlaylist
+  // TODO: removePlaylist
 
   return {
     playlists: data || [],
     isLoading: isSaving,
-    // editSong,
-    // error,
-    // addSong,
-    // deleteAlbum,
+    error,
     addPlaylist,
     isFetching,
   };
