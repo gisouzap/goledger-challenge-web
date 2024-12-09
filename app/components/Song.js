@@ -9,19 +9,21 @@ import { useSong } from '@/hooks/useSong';
 import LoadingSpinner from './LoadingSpinner';
 
 const Song = ({ item }) => {
-  const { song, isLoading: isSongLoading } = useSong(item['@key']);
-
-  const { album, isLoading: isAlbumLoading } = useAlbum(song?.album['@key']);
+  const { song, isLoading: isSongLoading } = useSong(item?.['@key']);
+  const { album, isLoading: isAlbumLoading } = useAlbum(song?.album?.['@key']);
   const { artist, isLoading: isArtistLoading } = useArtist(
-    album?.artist['@key']
+    album?.artist?.['@key']
   );
+
+  if (isSongLoading || isAlbumLoading || isArtistLoading)
+    return <LoadingSpinner />;
+
+  if (!song || !album || !artist) {
+    return null;
+  }
 
   return (
     <Box>
-      {(isSongLoading || isAlbumLoading || isArtistLoading) && (
-        <LoadingSpinner />
-      )}
-
       <Box
         p="4"
         boxShadow="md"
