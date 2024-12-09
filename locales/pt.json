@@ -8,5 +8,7 @@
   "artists.loading": "Procurando por artists",
   "artists.title": "Artistas",
   "artists.country": "País: {country}",
-  "artists.lastUpdated": "Última atualização: {updatedAt}"
+  "artists.lastUpdated": "Última atualização: {updatedAt}",
+  "albums.loading": "Procurando por álbuns",
+  "albums.title": "Álbuns"
 }

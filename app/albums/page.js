@@ -34,7 +34,7 @@ export default function AlbumsPage() {
     return (
       <Box textAlign="center" mt="10">
         <Spinner size="xl" />
-        <Text mt="4">Buscando por albuns...</Text>
+        <Text mt="4">{formatMessage({ id: 'albums.loading' })}</Text>
       </Box>
     );
   }
@@ -64,7 +64,7 @@ export default function AlbumsPage() {
         alignItems="center"
         p="4"
       >
-        Álbuns
+        {formatMessage({ id: 'albums.title' })}
         <CreateAlbumDialog onSave={addAlbum} />
       </Heading>
 
