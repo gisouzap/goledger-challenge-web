@@ -67,7 +67,7 @@ const CreatePlaylistDialog = ({ onSave }) => {
         </DialogHeader>
         <DialogBody>
           <Stack gap="5">
-            <Field label={formatMessage({ id: 'playlists.selectSong' })}>
+            <Field label={formatMessage({ id: 'playlists.name' })}>
               <Input
                 value={newPlaylist.name}
                 onChange={e =>
