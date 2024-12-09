@@ -5,8 +5,8 @@
 2. Clone o repositório:
 
    ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd <NOME_DA_PASTA>
+   git clone git@github.com:gisouzap/goledger-challenge-web.git
+   cd goledger-challenge-web
    ```
 
 3. Instalação de dependências
