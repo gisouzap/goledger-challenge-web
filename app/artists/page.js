@@ -18,6 +18,7 @@ import Stack from '../components/Stack';
 import EditArtistDialog from '../components/EditArtistDialog';
 import CreateArtistDialog from '../components/CreateArtistDialog';
 import { useArtists } from '@/hooks/useArtists';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function ArtistsPage() {
   const { formatMessage } = useIntl();
@@ -89,7 +90,8 @@ export default function ArtistsPage() {
               p="4"
               boxShadow="md"
               borderRadius="md"
-              bg="purple.800"
+              borderWidth="thin"
+              borderColor="purple.800"
             >
               <Heading
                 as="h2"
@@ -134,22 +136,7 @@ export default function ArtistsPage() {
       </Stack>
       <Toaster />
 
-      {isLoading && (
-        <Box
-          position="absolute"
-          background="black"
-          width="100%"
-          height="100%"
-          top={0}
-          left={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          opacity={0.8}
-        >
-          <Spinner size="xl" opacity={1} />
-        </Box>
-      )}
+      {isLoading && <LoadingSpinner />}
     </Box>
   );
 }
