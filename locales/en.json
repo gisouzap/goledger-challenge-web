@@ -22,5 +22,12 @@
   "album.year": "Year: {year}",
   "album.artist": "Artist: {artist}",
   "album.country": "Country: {country}",
-  "album.editYear": "Edit Year"
+  "album.editYear": "Edit Year",
+  "playlists.loading": "Searching for playlists",
+  "playlists.title": "Playlists",
+  "playlists.songs": "Songs: ",
+  "playlists.createNew": "Create new Playlist",
+  "playlists.name": "Playlist Name",
+  "playlists.songsAdded": "Songs Added",
+  "playlists.selectSong": "Select one song"
 }

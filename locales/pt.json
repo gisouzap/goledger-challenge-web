@@ -2,6 +2,8 @@
   "welcome": "Welcome!",
   "delete": "Excluir",
   "add": "Adicionar",
+  "save": "Salvar",
+  "cancel": "Cancelar",
   "navbar.artists": "Artistas",
   "navbar.albums": "Álbuns",
   "navbar.playlists": "Playlists",
@@ -20,5 +22,12 @@
   "album.year": "Ano: {year}",
   "album.artist": "Artista: {artist}",
   "album.country": "País: {country}",
-  "album.editYear": "Editar ano"
+  "album.editYear": "Editar ano",
+  "playlists.loading": "Buscando por playlists",
+  "playlists.title": "Playlists",
+  "playlists.songs": "Músicas: ",
+  "playlists.createNew": "Criar nova Playlist",
+  "playlists.name": "Nome da Playlist",
+  "playlists.songsAdded": "Músicas Adicionadas",
+  "playlists.selectSong": "Selecione uma música"
 }

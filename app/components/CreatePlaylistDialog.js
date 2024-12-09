@@ -6,7 +6,6 @@ import { Button, Input, Stack, Text } from '@chakra-ui/react';
 import {
   DialogActionTrigger,
   DialogBody,
-  DialogCloseTrigger,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -24,6 +23,7 @@ import {
 
 import { useSongs } from '@/hooks/useSongs';
 import Song from './Song';
+import { useIntl } from 'react-intl';
 
 const NEW_PLAYLIST = {
   name: '',
@@ -32,6 +32,7 @@ const NEW_PLAYLIST = {
 };
 
 const CreatePlaylistDialog = ({ onSave }) => {
+  const { formatMessage } = useIntl();
   const { songs } = useSongs();
 
   const [newPlaylist, setPlaylist] = useState(NEW_PLAYLIST);
@@ -54,17 +55,19 @@ const CreatePlaylistDialog = ({ onSave }) => {
     <DialogRoot placement="center">
       <DialogTrigger asChild>
         <Button color="purple.500" variant="surface" fontFamily="Outfit">
-          Criar Nova Playlist
+          {formatMessage({ id: 'playlists.createNew' })}
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Criar Nova Playlist</DialogTitle>
+          <DialogTitle>
+            {formatMessage({ id: 'playlists.createNew' })}
+          </DialogTitle>
         </DialogHeader>
         <DialogBody>
           <Stack gap="5">
-            <Field label="Nome da PlayList">
+            <Field label={formatMessage({ id: 'playlists.selectSong' })}>
               <Input
                 value={newPlaylist.name}
                 onChange={e =>
@@ -82,7 +85,9 @@ const CreatePlaylistDialog = ({ onSave }) => {
                 })
               }
             >
-              <NativeSelectField placeholder="Select one music">
+              <NativeSelectField
+                placeholder={formatMessage({ id: 'playlists.selectSong' })}
+              >
                 {songs?.map((song, idx) => (
                   <option
                     value={song['@key']}
@@ -101,13 +106,13 @@ const CreatePlaylistDialog = ({ onSave }) => {
                 document.querySelector('select').value = '';
               }}
             >
-              Adicionar
+              {formatMessage({ id: 'add' })}
             </Button>
           </Stack>
 
           {selectedSongs.length > 0 && (
             <Text mt="6" textAlign="center">
-              Músicas Adicionadas
+              {formatMessage({ id: 'playlists.songsAdded' })}
             </Text>
           )}
 
@@ -145,12 +150,12 @@ const CreatePlaylistDialog = ({ onSave }) => {
         <DialogFooter>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" variant="outline" onClick={clear}>
-              Cancel
+              {formatMessage({ id: 'cancel' })}
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" onClick={handleSave}>
-              Save
+              {formatMessage({ id: 'save' })}
             </Button>
           </DialogActionTrigger>
         </DialogFooter>

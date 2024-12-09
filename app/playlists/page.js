@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useIntl } from 'react-intl';
 import {
   Box,
   Grid,
@@ -11,7 +12,6 @@ import {
   HStack,
   Spinner,
 } from '@chakra-ui/react';
-import { useIntl } from 'react-intl';
 
 import { usePlaylists } from '@/hooks/usePlaylists';
 import PlaylistDialog from '../components/PlaylistDialog';
@@ -21,38 +21,28 @@ import LoadingSpinner from '../components/LoadingSpinner';
 export default function PlaylistsPage() {
   const { formatMessage } = useIntl();
 
-  const { playlists, isFetching, addPlaylist, isLoading } = usePlaylists();
+  const { playlists, error, isFetching, addPlaylist, isLoading } =
+    usePlaylists();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState();
   const [showDialog, setShowDialog] = useState(false);
-
-  // const playlist = [
-  //   {
-  //     name: 'Play do seculo',
-  //     songs: [{}, {}, {}],
-  //   },
-  // ];
-  // const { songs, addSong, editSong } = useSongs();
-
-  // const [selectedSong, setSelectedSong] = useState();
-  // const [showDialog, setShowDialog] = useState(false);
 
   if (isFetching) {
     return (
       <Box textAlign="center" mt="10">
         <Spinner size="xl" />
-        <Text mt="4">Buscando por playlists</Text>
+        <Text mt="4">{formatMessage({ id: 'playlists.loading' })}</Text>
       </Box>
     );
   }
 
-  // if (error) {
-  //   return (
-  //     <Box textAlign="center" mt="10">
-  //       <Text color="red.500">{error}</Text>
-  //     </Box>
-  //   );
-  // }
+  if (error) {
+    return (
+      <Box textAlign="center" mt="10">
+        <Text color="red.500">{error}</Text>
+      </Box>
+    );
+  }
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -66,8 +56,16 @@ export default function PlaylistsPage() {
       flexDirection="column"
       gap="5"
     >
-      <Heading as="h1" size="xl" mt="6">
-        Playlists
+      <Heading
+        as="h1"
+        size="xl"
+        mt="6"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        p="4"
+      >
+        {formatMessage({ id: 'playlists.title' })}
         <CreatePlaylistDialog onSave={addPlaylist} />
       </Heading>
 
@@ -111,7 +109,11 @@ export default function PlaylistsPage() {
                 <Text fontWeight="bold" fontSize="md">
                   {playlist.name}
                 </Text>
-                <Text fontSize="small">Músicas: {playlist.songs.length}</Text>
+
+                <Text fontSize="small">
+                  {formatMessage({ id: 'playlists.songs' })}
+                  {playlist.songs.length}
+                </Text>
               </Link>
             </HStack>
           </Box>

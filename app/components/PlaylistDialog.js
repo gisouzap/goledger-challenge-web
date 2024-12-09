@@ -20,8 +20,11 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import Song from './Song';
+import { useIntl } from 'react-intl';
 
-const PlaylistDialog = ({ playlist, changeDialog, onSave }) => {
+const PlaylistDialog = ({ playlist, changeDialog }) => {
+  const { formatMessage } = useIntl();
+
   return (
     <>
       <DialogRoot
@@ -45,7 +48,7 @@ const PlaylistDialog = ({ playlist, changeDialog, onSave }) => {
               />
 
               <Text textAlign="center" fontSize="lg">
-                Músicas
+                {formatMessage({ id: 'playlists.songsAdded' })}
               </Text>
               <Separator />
               <Stack
@@ -82,7 +85,9 @@ const PlaylistDialog = ({ playlist, changeDialog, onSave }) => {
 
           <DialogFooter>
             <DialogActionTrigger asChild>
-              <Button>Excluir Playlist?</Button>
+              <Button color="purple.700" variant="surface">
+                {formatMessage({ id: 'delete' })}
+              </Button>
             </DialogActionTrigger>
           </DialogFooter>
 
