@@ -72,36 +72,13 @@ export const useSongs = () => {
     },
   });
 
-  // const { mutate: deleteAlbum, isPending: isDeleting } = useMutation({
-  //   mutationFn: async key => {
-  //     const res = await fetch('/api/albums/delete', {
-  //       method: 'DELETE',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         key,
-  //       }),
-  //     });
-
-  //     if (!res.ok) {
-  //       throw new Error('Erro ao adicionar album');
-  //     }
-  //     return res.json();
-  //   },
-
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['albums']);
-  //   },
-  // });
-
   return {
     songs: data || [],
-    isLoading: isSaving,
+    isLoading: isSaving || isEditing,
     editSong,
     error,
     addSong,
-    // deleteAlbum,
+
     isFetching,
   };
 };
