@@ -76,7 +76,7 @@ const SongDialog = ({ song, changeDialog }) => {
 
           <DialogFooter>
             <DialogActionTrigger asChild>
-              <Button>Excluir Música?</Button>
+              {/* <Button>Excluir Música?</Button> */}
             </DialogActionTrigger>
           </DialogFooter>
 
