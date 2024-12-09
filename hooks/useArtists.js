@@ -96,8 +96,12 @@ export const useArtists = () => {
     },
   });
 
+  const sortedArtists = data
+    ?.slice()
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   return {
-    artists: data || [],
+    artists: sortedArtists || [],
     isLoading: isSaving || isDeleting || isEditing,
     editArtist,
     error,
