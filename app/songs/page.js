@@ -8,41 +8,41 @@ import {
   Text,
   Image,
   Link,
-  Stack,
   Separator,
   HStack,
-  Button,
+  Spinner,
 } from '@chakra-ui/react';
 import { useIntl } from 'react-intl';
 
 import { useSongs } from '@/hooks/useSongs';
 import SongDialog from '../components/SongDialog';
 import CreateSongDialog from '../components/CreateSongDialog';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function SonsPage() {
   const { formatMessage } = useIntl();
 
-  const { songs, addSong, editSong } = useSongs();
+  const { songs, addSong, editSong, isFetching, isLoading, error } = useSongs();
 
   const [selectedSong, setSelectedSong] = useState();
   const [showDialog, setShowDialog] = useState(false);
 
-  // if (isFetching) {
-  //   return (
-  //     <Box textAlign="center" mt="10">
-  //       <Spinner size="xl" />
-  //       <Text mt="4">Buscando por albuns</Text>
-  //     </Box>
-  //   );
-  // }
+  if (isFetching) {
+    return (
+      <Box textAlign="center" mt="10">
+        <Spinner size="xl" />
+        <Text mt="4">{formatMessage({ id: 'songs.loading' })}</Text>
+      </Box>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <Box textAlign="center" mt="10">
-  //       <Text color="red.500">{error}</Text>
-  //     </Box>
-  //   );
-  // }
+  if (error) {
+    return (
+      <Box textAlign="center" mt="10">
+        <Text color="red.500">{error}</Text>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -52,8 +52,16 @@ export default function SonsPage() {
       flexDirection="column"
       gap="5"
     >
-      <Heading as="h1" size="xl" mt="6">
-        Músicas
+      <Heading
+        as="h1"
+        size="xl"
+        mt="6"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        p="4"
+      >
+        {formatMessage({ id: 'songs.title' })}
         <CreateSongDialog onSave={addSong} />
       </Heading>
 
@@ -63,7 +71,7 @@ export default function SonsPage() {
         templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
         gap="6"
         overflow="auto"
-        padding="4"
+        p="4"
       >
         {songs?.map((song, idx) => (
           <Box
@@ -110,6 +118,8 @@ export default function SonsPage() {
           onSave={editSong}
         />
       )}
+
+      {isLoading && <LoadingSpinner />}
     </Box>
   );
 }

@@ -29,5 +29,13 @@
   "playlists.createNew": "Create new Playlist",
   "playlists.name": "Playlist Name",
   "playlists.songsAdded": "Songs Added",
-  "playlists.selectSong": "Select one song"
+  "playlists.selectSong": "Select one song",
+  "songs.loading": "Searching for songs",
+  "songs.title": "Songs",
+  "songs.name": "Songs name",
+  "songs.selectAlbum": "Select Album",
+  "songs.album": "Album",
+  "song.album": "Album: {name}, {year}",
+  "song.artist": "Artist: {name}, {country}",
+  "song.title": "Song - {song}"
 }

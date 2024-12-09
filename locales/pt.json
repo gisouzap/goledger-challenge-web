@@ -29,5 +29,13 @@
   "playlists.createNew": "Criar nova Playlist",
   "playlists.name": "Nome da Playlist",
   "playlists.songsAdded": "Músicas Adicionadas",
-  "playlists.selectSong": "Selecione uma música"
+  "playlists.selectSong": "Selecione uma música",
+  "songs.loading": "Procurando por músicas",
+  "songs.title": "Músicas",
+  "songs.name": "Nome da música",
+  "songs.selectAlbum": "Selecionar Álbum",
+  "songs.album": "Álbum",
+  "song.album": "Álbum: {name}, {year}",
+  "song.artist": "Artista: {name}, {country}",
+  "song.title": "Música - {song}"
 }

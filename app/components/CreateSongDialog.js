@@ -22,6 +22,7 @@ import {
   NativeSelectRoot,
 } from '@/components/ui/native-select';
 import { useAlbums } from '@/hooks/useAlbums';
+import { useIntl } from 'react-intl';
 
 const NEW_SONG = {
   name: '',
@@ -33,6 +34,8 @@ const NEW_SONG = {
 };
 
 const CreateSongDialog = ({ onSave }) => {
+  const { formatMessage } = useIntl();
+
   const { albums } = useAlbums();
 
   const [newSong, setNewSong] = useState(NEW_SONG);
@@ -50,7 +53,7 @@ const CreateSongDialog = ({ onSave }) => {
     <DialogRoot placement="center">
       <DialogTrigger asChild>
         <Button color="purple.500" variant="surface" fontFamily="Outfit">
-          Adicionar
+          {formatMessage({ id: 'add' })}
         </Button>
       </DialogTrigger>
 
@@ -60,40 +63,48 @@ const CreateSongDialog = ({ onSave }) => {
         </DialogHeader>
         <DialogBody>
           <Stack gap="5">
-            <Field label="Nome">
+            <Field label={formatMessage({ id: 'songs.name' })}>
               <Input
                 value={newSong.name}
                 onChange={e => handleChange({ name: e.target.value })}
               />
             </Field>
 
-            <NativeSelectRoot
-              size="xl"
-              onChange={e =>
-                handleChange({
-                  album: { ...newSong.album, '@key': e.target.value },
-                })
-              }
-            >
-              <NativeSelectField placeholder="Select option">
-                {albums?.map(album => (
-                  <option value={album['@key']} key={album['@key']}>
-                    {album.name}
-                  </option>
-                ))}
-              </NativeSelectField>
-            </NativeSelectRoot>
+            <Field label={formatMessage({ id: 'songs.album' })}>
+              <NativeSelectRoot
+                size="xl"
+                onChange={e =>
+                  handleChange({
+                    album: { ...newSong.album, '@key': e.target.value },
+                  })
+                }
+              >
+                <NativeSelectField
+                  placeholder={formatMessage({ id: 'songs.selectAlbum' })}
+                >
+                  {albums?.map(album => (
+                    <option
+                      value={album['@key']}
+                      key={album['@key']}
+                      style={{ backgroundColor: '#171717' }}
+                    >
+                      {album.name}
+                    </option>
+                  ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
+            </Field>
           </Stack>
         </DialogBody>
         <DialogFooter>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" variant="outline">
-              Cancel
+              {formatMessage({ id: 'cancel' })}
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
             <Button colorPalette="purple" onClick={handleSave}>
-              Save
+              {formatMessage({ id: 'save' })}
             </Button>
           </DialogActionTrigger>
         </DialogFooter>

@@ -6,8 +6,6 @@ import {
   Image,
   HStack,
   DialogFooter,
-  Spinner,
-  Box,
   Button,
 } from '@chakra-ui/react';
 
@@ -23,32 +21,20 @@ import {
 import { useAlbum } from '@/hooks/useAlbum';
 
 import { useArtist } from '@/hooks/useArtist';
+import { useIntl } from 'react-intl';
+import LoadingSpinner from './LoadingSpinner';
 
-const SongDialog = ({ song, changeDialog, onSave }) => {
-  const { album, isLoading } = useAlbum(song.album['@key']);
+const SongDialog = ({ song, changeDialog }) => {
+  const { formatMessage } = useIntl();
+
+  const { album, isLoading } = useAlbum(song?.album['@key']);
   const { artist, isLoading: isLoadingArtist } = useArtist(
     album?.artist['@key']
   );
 
   return (
     <>
-      {(isLoading || isLoadingArtist) && (
-        <Box
-          position="absolute"
-          background="black"
-          width="100%"
-          height="100%"
-          top={0}
-          left={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          opacity={0.8}
-          zIndex="1500"
-        >
-          <Spinner size="xl" opacity={1} />
-        </Box>
-      )}
+      {(isLoading || isLoadingArtist) && <LoadingSpinner />}
 
       <DialogRoot
         placement="center"
@@ -57,7 +43,9 @@ const SongDialog = ({ song, changeDialog, onSave }) => {
       >
         <DialogContent>
           <DialogHeader textAlign="center">
-            <DialogTitle>Música - {song.name}</DialogTitle>
+            <DialogTitle>
+              {formatMessage({ id: 'song.title' }, { song: song?.name })}
+            </DialogTitle>
           </DialogHeader>
           <DialogBody>
             <HStack gap="5">
@@ -71,10 +59,16 @@ const SongDialog = ({ song, changeDialog, onSave }) => {
 
               <Stack gap="5">
                 <Text>
-                  Álbum: {album?.name}, {album?.year}
+                  {formatMessage(
+                    { id: 'song.album' },
+                    { name: album?.name, year: album?.year }
+                  )}
                 </Text>
                 <Text>
-                  Artista: {artist?.name}, {artist?.country}
+                  {formatMessage(
+                    { id: 'song.artist' },
+                    { name: artist?.name, country: artist?.country }
+                  )}
                 </Text>
               </Stack>
             </HStack>

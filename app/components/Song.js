@@ -1,6 +1,7 @@
 'use client';
 
 import { Text, Image, HStack, Box } from '@chakra-ui/react';
+import { useIntl } from 'react-intl';
 
 import { useAlbum } from '@/hooks/useAlbum';
 
@@ -9,6 +10,7 @@ import { useSong } from '@/hooks/useSong';
 import LoadingSpinner from './LoadingSpinner';
 
 const Song = ({ item }) => {
+  const { formatMessage } = useIntl();
   const { song, isLoading: isSongLoading } = useSong(item?.['@key']);
   const { album, isLoading: isAlbumLoading } = useAlbum(song?.album?.['@key']);
   const { artist, isLoading: isArtistLoading } = useArtist(
@@ -42,10 +44,16 @@ const Song = ({ item }) => {
           <Box>
             <Text> {song?.name}</Text>
             <Text fontSize="smaller" fontWeight="light">
-              Álbum: {album?.name}, {album?.year}
+              {formatMessage(
+                { id: 'song.album' },
+                { name: album?.name, year: album?.year }
+              )}
             </Text>
             <Text fontSize="smaller" fontWeight="light">
-              Artista: {artist?.name}, {artist?.country}
+              {formatMessage(
+                { id: 'song.artist' },
+                { name: artist?.name, country: artist?.country }
+              )}
             </Text>
           </Box>
         </HStack>
